@@ -1,0 +1,34 @@
+CREATE TABLE t_utilisateurs
+(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nom VARCHAR(100),
+    prenom VARCHAR(100),
+    email VARCHAR(255),
+    date_naissance DATE,
+    pays VARCHAR(255),
+    ville VARCHAR(255),
+    code_postal VARCHAR(5),
+    nombre_achat INT
+)
+
+
+INSERT INTO t_utilisateurs ('id','nom','prenom','email','date_de_naissance','pays','ville','code_postale', 'nombre_achat',) VALUES (NULL, 'chirac','jacques';'jacques.chirac@france.fr','1931-02-02','france','paris','75019', NULL);
+
+
+INSERT INTO t_utilisateurs (id, nom, prenom, email, date_naissance, pays, ville, code_postal, nombre_achat) VALUES (NULL, 'Hugo', 'Victor', 'victor.hugo@france.fr', '1905-02-02', 'France', 'Paris', '75019', NULL);
+
+
+INSERT INTO t_utilisateurs (id, nom, prenom, email, date_naissance, pays, ville, code_postal, nombre_achat) VALUES (NULL, 'Sahar', 'Ferchichi', 'sahar.ferchichi@france.fr', '1989-05-16', 'Paris', '75019', NULL);
+
+SELECT * FROM t_utilisateurs ORDER BY nom ASC
+
+SELECT * FROM t_utilisateurs ORDER BY prenom ASC
+
+SELECT * FROM t_utilisateurs ORDER BY ville ASC  (ect on peut demandre ce qu'on veut)
+
+
+SELECT nom,prenom FROM t_utilisateurs 
+
+DELETE FROM t_utilisateurs WHERE nom='chirac'(pour supprimer un nom par exemple)
+
+DELETE FROM t_utilisateurs WHERE ville='Paris'
