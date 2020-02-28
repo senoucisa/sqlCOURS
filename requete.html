@@ -32,3 +32,214 @@ SELECT nom,prenom FROM t_utilisateurs
 DELETE FROM t_utilisateurs WHERE nom='chirac'(pour supprimer un nom par exemple)
 
 DELETE FROM t_utilisateurs WHERE ville='Paris'
+
+INSERT INTO employes (id_employes, prenom, nom, sexe, service, date_embauche, salaire) VALUES
+(350, 'Jean-pierre', 'Laborde', 'm', 'direction', '1999-12-09', 5000),
+(388, 'Clement', 'Gallet', 'm', 'commercial', '2000-01-15', 2300),
+(415, 'Thomas', 'Winter', 'm', 'commercial', '2000-05-03', 3550),
+(417, 'Chloe', 'Dubar', 'f', 'production', '2001-09-05', 1900),
+(491, 'Elodie', 'Fellier', 'f', 'secretariat', '2002-02-22', 1600),
+(509, 'Fabrice', 'Grand', 'm', 'comptabilite', '2003-02-20', 1900),
+(547, 'Melanie', 'Collier', 'f', 'commercial', '2004-09-08', 3100),
+(592, 'Laura', 'Blanchet', 'f', 'direction', '2005-06-09', 4500),
+(627, 'Guillaume', 'Miller', 'm', 'commercial', '2006-07-02', 1900),
+(655, 'Celine', 'Perrin', 'f', 'commercial', '2006-09-10', 2700),
+(699, 'Julien', 'Cottet', 'm', 'secretariat', '2007-01-18', 1390),
+(701, 'Mathieu', 'Vignal', 'm', 'informatique', '2008-12-03', 2000),
+(739, 'Thierry', 'Desprez', 'm', 'secretariat', '2009-11-17', 1500),
+(780, 'Amandine', 'Thoyer', 'f', 'communication', '2010-01-23', 1500),
+(802, 'Damien', 'Durand', 'm', 'informatique', '2010-07-05', 2250),
+(854, 'Daniel', 'Chevel', 'm', 'informatique', '2011-09-28', 1700),
+(876, 'Nathalie', 'Martin', 'f', 'juridique', '2012-01-12', 3200),
+(900, 'Benoit', 'Lagarde', 'm', 'production', '2013-01-03', 2550),
+(933, 'Emilie', 'Sennard', 'f', 'commercial', '2014-09-11', 1800),
+(990, 'Stephanie', 'Lafaye', 'f', 'assistant', '2015-06-02', 1775);
+
+SELECT DISTINCT (service) FROM employes (cette formule sert a sortir que les service qui existe dans cette entreprise sans les repeter plusieurs fois).
+
+SELECT  id_employes,prenom,nom,sexe,service,date_embauche,salaire FROM employes (cette formule sert a sortir toute la liste du tableau).
+
+SELECT nom,prenom FROM employes WHERE service="informatique"
+
+SELECT nom,prenom FROM employes WHERE salaire=5000 (cette formule sert a sortir le nom et prenom des employés que leur salaire atteint 5000eu)
+
+SELECT nom,prenom date_embauche FROM employes WHERE date_embauche BETWEEN '2006-01-01'AND '2010-12-31'(cette formule veut dire affiche moi le nom et prenom des employes qui ont ete embauché entre le 2006 et 2010)
+
+affiche moi // quoi?//de? // nom de table //à condition que ..(là où)// les employes entré dans la sociéte entre 2006 et 2010.
+
+SELECT nom,prenom date_embauche FROM  employes WHERE date_embauche BETWEEN '2006-01-01'AND CURDATE () (cette formule sert a definir les employés qui ont ete embauché du 2006 a la date aujourd'hui surtout ne pas oublié les parentheses obligatoires)
+
+SELECT prenom FROM employes WHERE prenom LIKE 's%'(cette formule demande la liste des nom qui commence par un S)
+quand le % et avant cest pour les prenom qui se termine par un S 
+
+SELECT prenom FROM employes WHERE prenom LIKE '%-%'(cette formule sert a sortir les prenom composé)
+
+SELECT nom,prenom,servive FROM employe WHERE service !='informatique'(cette formule va afficher les personnes qui ne travail pas dans le service informatique)on peut remplacer (!=)par (<>)
+
+SELECT nom,prenom,salaire FROM employes WHERE salaire > 3000 (cette formule sert a demander les noms et prenoms des personnes qui touchent 3000eu)et pour savoir ce qui touche moins que 3000eu ont inverse le guillemets.(<).
+
+SELECT nom,prenom,salaire FROM employes where salaire < 3000 ORDER BY salaire ASC (cette formule sert a definir les employés qui touche moins de 3000eu)
+
+SELECT nom,prenom,salaire FROM employes WHERE salaire < 3000 ORDER BY  salaire ASC, prenom ASC(cette formule definit le prenom des employes qui touche 3000eu)
+
+
+SELECT nom,prenom,salaire FROM employes WHERE salaire < 3000 ORDER BY  salaire ASC, sexe ASC (cette formule definit le sexe des employes qui touche 3000eu)
+
+SELECT nom ,prenom ,service , salaire FROM employes ORDER BY  salaire DESC LIMIT 0.3 (cette formule affiche les salaires du plus petit au plus grand du 0 au 3eme)
+SELECT nom,prenom,salaire*12 FROM employes;(cette formule donne le total d'un salaire d'un employe sur 12 mois)
+
+SELECT nom,prenom,salaire*12 AS salaire_annuel FROM employes(cette formule calcule le salaire annuel des employes)
+
+SELECT SUM (salaire*12) FROM employes(cette formule donne la somme des employes sur l'année et les parentheses sont obligatoires sur salaire)
+
+SELECT AVG (salaire) FROM employes(cette formule sert a calculer la moyenne du salaire des employes)
+
+SELECT ROUND (AVG (salaire)) FROM employes(cette formule sert a arrondir les prix ou salaire ect.)
+
+SELECT COUNT (*) FROM employes WHERE sexe='f'(cette formule sert a savoir combien de femmes travail dans l'entreprise et pour savoir combien d'hommes v il faut juste changer le F par le M )
+SELECT MIN (salaire) FROM employes(cette formule donne le salaire minimum de l'entreprise)
+SELECT MAX (salaire) FROM employes(cette formule donne le salaire maximum de l'entreprise)
+
+SELECT prenom, salaire FROM employes WHERE salaire =(SELECT MIN (salaire) FROM employes)(cette formule est imbriquées dans une autre formule)
+
+SELECT nom, prenom,service From employes WHERE servive IN('comptabilité','informatique')(cette formule me donne la liste des employes qui sont a linformatique et a la comptabilité)
+
+SELECT nom,prenom,service FROM employes WHERE service='commercial' AND salaire=<=2000(cette formule nous donne la liste des employes qui gagne moins de 2000eu)
+
+SELECT nom,prenom,service,salaire FROM employes WHERE service='production' AND salaire = 1900 OR salaire=2300(cette formule donne les priorités de salaires des employes)
+
+INSERT INTO employes (prenom, nom, sexe, service, date_embauche, salaire) VALUES ('alexis', 'richy', 'm', 'informatique', '2011-12-28', 1800)(cette formule sert a ajouter une personne)
+
+s
+
+<!-- exercice  -->
+
+1. Afficher la profession de l'employé 547.
+
+SELECT nom , prenom , service  FROM employes WHERE id_employes=547;
+
+2. Afficher la date d'embauche de : Amandine.
+
+SELECT date_embauche FROM employes WHERE prenom='amandine';
+
+
+3. Afficher le nombre de commerciaux.
+
+SELECT COUNT(*) AS 'nombre_employes' FROM employes WHERE service='commercial';
+
+
+4. Afficher le coût des commerciaux sur 1 année.
+
+SELECT SUM(salaire*12) FROM employes WHERE service='commercial';
+
+
+5. Afficher le salaire moyen par service.
+
+SELECT service, round(AVG( salaire )) FROM employes GROUP BY service;
+
+6. Afficher le nombre de recrutements sur l'année 2010.
+
+1-SELECT COUNT (*) FROM employes WHERE date_embauche BETWEEN '2010-01-01'AND '2010-12-31'
+2- SELECT COUNT (*) AS 'nbr_recrutement_2010' FROM employes WHERE date_embauche BETWEEN '2010-01-01'AND '2010-12-31'
+3- SELECT COUNT (*) AS 'nbr_recrutement_2010' FROM employes WHERE date_embauche LIKE '2010%';
+
+7. Augmenter le salaire pour chaque employé de 100€.
+
+UPDATE employes SET salaire = salaire+100
+
+8. Afficher le nombre de services (différents).
+
+SELECT COUNT(DISTINCT service) FROM employes;
+
+
+9. Afficher les informations de l'employé du service commercial gagnant le salaire le plus élevé
+
+SELECT prenom, salaire FROM employes WHERE service='commercial' AND salaire = ( SELECT MAX( salaire ) FROM employes WHERE service='commercial' );
+
+10. Afficher l'employé ayant été embauché en dernier.
+
+1-SELECT * FROM employes WHERE date_embauche = (SELECT max(date_embauche) FROM employes);
+2- (SELECT MAX (date_embauche) FROM employes)
+
+<!-- creation d'une bibliotheque -->
+
+
+CREATE DATABASE IF NOT EXISTS bibliotheque ;
+USE bibliotheque ;
+CREATE TABLE abonne (
+id_abonne INT(3) NOT NULL AUTO_INCREMENT,
+prenom VARCHAR(20) NOT NULL,
+PRIMARY KEY (id_abonne)
+) ENGINE=InnoDB ;
+CREATE TABLE emprunt (
+id_emprunt INT(3) NOT NULL AUTO_INCREMENT,
+id_livre INT(3) DEFAULT NULL,
+id_abonne INT(3) DEFAULT NULL,
+date_sortie DATE NOT NULL,
+date_rendu DATE DEFAULT NULL,
+PRIMARY KEY (id_emprunt)
+) ENGINE=InnoDB ;
+CREATE TABLE livre (
+id_livre INT(3) NOT NULL AUTO_INCREMENT,
+auteur VARCHAR(30) NOT NULL,
+titre VARCHAR(30) NOT NULL,
+PRIMARY KEY (id_livre)
+) ENGINE=InnoDB ;
+
+/////////////////////CREATION DES CLEFS ETRANGERES///////////////////////////////////////
+
+ALTER TABLE emprunt ADD FOREIGN KEY ( id_livre ) REFERENCES bibliotheque.livre (id_livre);
+ALTER TABLE emprunt ADD FOREIGN KEY ( id_abonne ) REFERENCES bibliotheque.abonne (id_abonne);
+
+(POUR LA CREATION DES ABONNE)
+
+INSERT INTO abonne (id_abonne, prenom) VALUES
+(1, 'Guillaume'),
+(2, 'Benoit'),
+(3, 'Chloe'),
+(4, 'Laura');
+
+(pour la creation des nom des livres)
+
+INSERT INTO livre (id_livre, auteur, titre) VALUES
+(100, 'GUY DE MAUPASSANT', 'Une vie'),
+(101, 'GUY DE MAUPASSANT', 'Bel-Ami '),
+(102, 'HONORE DE BALZAC', 'Le père Goriot'),
+(103, 'ALPHONSE DAUDET', 'Le Petit chose'),
+(104, 'ALEXANDRE DUMAS', 'La Reine Margot'),
+(105, 'ALEXANDRE DUMAS', 'Les Trois Mousquetaires');
+
+(pour la creation des dates d'entrée et de sortie des livres)
+
+INSERT INTO emprunt (id_emprunt, id_livre, id_abonne, date_sortie, date_rendu) VALUES
+(1, 100, 1, '2014-12-17', '2014-12-18'),
+(2, 101, 2, '2014-12-18', '2014-12-20'),
+(3, 100, 3, '2014-12-19', '2014-12-22'),
+(4, 103, 4, '2014-12-19', '2014-12-22'),
+(5, 104, 1, '2014-12-19', '2014-12-28'),
+(6, 105, 2, '2015-03-20', '2015-03-26'),
+(7, 105, 3, '2015-06-13', NULL),
+(8, 100, 2, '2015-06-15', NULL);
+
+SELECT id_livre FROM emprunt WHERE date_rendu IS NULL     (cette formule sert a savoir quelles sont les livres qui n'ont pas ete rendu ,elle nous donne l'identifiant)
+
+SELECT titre FROM livre WHERE id_livre IN (SELECT  id_livre FROM emprunt WHERE date_rendu IS NULL )   cette formule nous donne les noms des livres qui n'ont pas ete rendu.
+
+SELECT titre FROM livre WHERE id_livre IN (SELECT id_livre FROM emprunt WHERE id_abonne =3)    Cette formule nous donne id des livres (emprunté par cloé qui a l'identifiant 3)
+
+
+SELECT prenom FROM abonne WHERE id_abonne IN (SELECT id_abonne FROM emprunt  WHERE date_sortie = '2014-12-19')    Cette formules donnes les prenoms des abonnées ayant emprunté un livre le 19-12-2014.
+
+<!-- ATTENTION le mot clef IN permet de sortir (au contraire de =)plusieurs résultats  -->
+
+Afficher la liste des abonnes ayant deja emprunté un livre d'Alphonse Daudet
+Cette formule permet de donner la liste d'abonné qui ont emprunté le livre d'Alphonse Daudet
+
+1-SELECT id_abonne FROM emprunt WHERE id_livre IN (SELECT id_livre FROM livre WHERE auteur ='ALPHONSE DAUDET')
+2-
+
+SELECT prenom FROM livre WHERE id_abonne IN ((SELECT id_livre FROM livre WHERE auteur ='ALPHONSE DAUDET'))
+3-SELECT prenom FROM abonne WHERE id_abonne IN (4)
+
+Afficher le(s) titres de(s) livres que Chloé a emprunté à la bibliotheque
+SELECT titre FROM livre WHERE id_livre IN (SELECT id_livre FROM emprunt WHERE id_abonne IN (SELECT id_abonne FROM abonne WHERE prenom='chloè'))
